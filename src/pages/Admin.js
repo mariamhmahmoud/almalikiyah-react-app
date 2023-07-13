@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 
 export default function Admin() {
     // const [, setToken] = useState('');
-    // const [, setExpire] = useState('');
+    const [, setExpire] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
