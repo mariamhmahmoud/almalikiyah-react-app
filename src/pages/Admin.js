@@ -1,19 +1,14 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material';
 
 
 export default function Admin() {
-    const [token, setToken] = useState('');
-    const [expire, setExpire] = useState('');
+    // const [, setToken] = useState('');
+    // const [, setExpire] = useState('');
     const navigate = useNavigate();
-    const [value, setValue] = React.useState('1');
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     useEffect(() => {
         refreshToken()
@@ -39,24 +34,25 @@ export default function Admin() {
             });
     };
 
-    const fetchJWT = {
-        interceptors: {
-            request: {
-                use: async (configFn) => {
-                    const currentDate = new Date();
-                    if (expire * 1000 < currentDate.getTime()) {
-                        const response = await fetch('/token');
-                        const data = await response.json();
-                        configFn.headers.Authorization = `Bearer ${data.accessToken}`;
-                        setToken(data.accessToken);
-                        const decoded = jwt_decode(data.accessToken);
-                        setExpire(decoded.exp);
-                    }
-                    return configFn;
-                },
-            },
-        },
-    };
+    // see https://mfikri.com/en/blog/react-express-mysql-authentication
+    // const fetchJWT = {
+    //     interceptors: {
+    //         request: {
+    //             use: async (configFn) => {
+    //                 const currentDate = new Date();
+    //                 if (expire * 1000 < currentDate.getTime()) {
+    //                     const response = await fetch('/token');
+    //                     const data = await response.json();
+    //                     configFn.headers.Authorization = `Bearer ${data.accessToken}`;
+    //                     setToken(data.accessToken);
+    //                     const decoded = jwt_decode(data.accessToken);
+    //                     setExpire(decoded.exp);
+    //                 }
+    //                 return configFn;
+    //             },
+    //         },
+    //     },
+    // };
 
     const logout = async () => {
         try {
