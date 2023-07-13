@@ -79,7 +79,6 @@ const Join = () => {
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-8 col-lg-8 col-xl-6">
                             <div className="row align-items-center mt-4">
-                                <h5>Your Information:</h5>
                                 <div className="col">
                                     <label htmlFor="firstname">First Name<span style={{ color: "red" }}>*</span></label>
                                     <input
@@ -94,6 +93,8 @@ const Join = () => {
                                         required
                                     />
                                 </div>
+                            </div>
+                            <div className="row align-items-center mt-4">
                                 <div className="col">
                                     <label htmlFor="lastname">Last Name<span style={{ color: "red" }}>*</span></label>
                                     <input
