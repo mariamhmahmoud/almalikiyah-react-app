@@ -3,15 +3,18 @@ import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material';
+import axios from 'axios';
 
 
 export default function Admin() {
-    // const [, setToken] = useState('');
-    const [, setExpire] = useState('');
+    const [name, setName] = useState('');
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         refreshToken()
+        getUsers()
     }, []);
 
 
@@ -35,24 +38,31 @@ export default function Admin() {
     };
 
     // see https://mfikri.com/en/blog/react-express-mysql-authentication
-    // const fetchJWT = {
-    //     interceptors: {
-    //         request: {
-    //             use: async (configFn) => {
-    //                 const currentDate = new Date();
-    //                 if (expire * 1000 < currentDate.getTime()) {
-    //                     const response = await fetch('/token');
-    //                     const data = await response.json();
-    //                     configFn.headers.Authorization = `Bearer ${data.accessToken}`;
-    //                     setToken(data.accessToken);
-    //                     const decoded = jwt_decode(data.accessToken);
-    //                     setExpire(decoded.exp);
-    //                 }
-    //                 return configFn;
-    //             },
-    //         },
-    //     },
-    // };
+    const axiosJWT = axios.create();
+
+    axiosJWT.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime()) {
+            const response = await axios.get('http://localhost:5000/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setName(decoded.name);
+            setExpire(decoded.exp);
+        }
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+
+    const getUsers = async () => {
+        const response = await axiosJWT.get('/', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log(response)
+    }
 
     const logout = async () => {
         try {
@@ -71,7 +81,7 @@ export default function Admin() {
 
     return (
         <>
-            <p>Hello</p>
+            <p>Hello {name}</p>
             <Button onClick={logout}>Logout</Button>
         </>
     );
