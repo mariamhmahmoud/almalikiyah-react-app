@@ -2,8 +2,12 @@
   "name": "create-react-app-starter",
   "version": "0.1.0",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.0",
     "axios": "^1.4.0",
     "bootstrap": "^4.6.2",
+    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^18.2.0",
@@ -33,5 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://expressjs-server-production-754b.up.railway.app"
 }
