@@ -1,11 +1,21 @@
 import './App.css';
 import Home from './pages/Home';
+import Join from './pages/Join';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    < BrowserRouter >
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/join" element={<Join />} />
+        {/* <Route path="/about" element={<About />} />
+        <Route path="/donate" element={<Donate />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/login" element={<Login />} /> */}
+      </Routes>
+    </BrowserRouter >
   );
 }
 
