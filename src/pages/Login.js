@@ -24,7 +24,7 @@ export default function Login() {
         };
 
         try {
-            fetch('https://expressjs-server-production-754b.up.railway.app/login', requestOptions)
+            fetch('/login', requestOptions)
                 .then(response => {
                     if (response.ok) {
                         console.log(response)
