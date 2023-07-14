@@ -57,17 +57,19 @@ export default function Admin() {
     });
 
     const getUsers = async () => {
-        const response = await axiosJWT.get('/', {
+        const response = await axiosJWT.get('/testing', {
             headers: {
-                Authorization: `Bearer ${token}`
-            }
+                Authorization: `Bearer ${token}`,
+                credentials: 'include'
+            },
+
         });
         console.log(response)
     }
 
     const logout = async () => {
         try {
-            fetch("https://expressjs-server-production-754b.up.railway.app/logout")
+            fetch("https://expressjs-server-production-754b.up.railway.app/logout", { credentials: 'include' })
                 .then(() => navigate("/login"))
 
 
