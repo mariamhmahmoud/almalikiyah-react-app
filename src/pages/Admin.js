@@ -19,7 +19,7 @@ export default function Admin() {
 
 
     const refreshToken = async () => {
-        fetch('/token')
+        fetch('https://expressjs-server-production-754b.up.railway.app/token')
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -44,7 +44,7 @@ export default function Admin() {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('/token');
+            const response = await axios.get('https://expressjs-server-production-754b.up.railway.app/token');
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
