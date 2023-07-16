@@ -4,6 +4,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from 'react-router-dom'
+import urls from '../data/api_urls.json';
+
 
 
 export default function Login() {
@@ -25,7 +27,7 @@ export default function Login() {
         };
 
         try {
-            fetch('https://expressjs-server-production-754b.up.railway.app/login', requestOptions)
+            fetch(urls.PROD_URL + urls.LOGIN, requestOptions)
                 .then(response => {
                     if (response.ok) {
                         console.log(response)

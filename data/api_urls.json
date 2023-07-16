@@ -1,5 +1,0 @@
-{
-    "ROOT_URL": "https://expressjs-server-production-754b.up.railway.app",
-    "LOGIN": "/login",
-    "TOKEN": "/token"
-}

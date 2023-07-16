@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
+import urls from '../data/api_urls.json'
 
 const Join = () => {
     const [firstName, setFirstName] = useState('');
@@ -49,7 +50,7 @@ const Join = () => {
 
     const handleRegister = async () => {
         try {
-            await axios.post('/join', {
+            await axios.post(urls.PROD_URL + urls.JOIN, {
                 firstName,
                 lastName,
                 address,
@@ -59,6 +60,8 @@ const Join = () => {
                 spouse,
                 children: childrenList
             });
+            console.log(spouse)
+            console.log(childrenList)
             console.log('Registration successful');
         } catch (error) {
             console.log(error);

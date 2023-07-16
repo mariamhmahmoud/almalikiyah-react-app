@@ -38,5 +38,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://expressjs-server-production-754b.up.railway.app"
+  "proxy": "http://localhost:3001/"
 }

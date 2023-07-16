@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material';
 import axios from 'axios';
+import urls from '../data/api_urls.json';
 
 
 export default function Admin() {
@@ -19,7 +20,7 @@ export default function Admin() {
 
 
     const refreshToken = async () => {
-        fetch('https://expressjs-server-production-754b.up.railway.app/token', { credentials: 'include' })
+        fetch(urls.PROD_URL + urls.TOKEN, { credentials: 'include' })
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -44,7 +45,7 @@ export default function Admin() {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('https://expressjs-server-production-754b.up.railway.app/token', { credentials: 'include' });
+            const response = await axios.get(urls.PROD_URL + urls.TOKEN, { credentials: 'include' });
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
@@ -69,7 +70,7 @@ export default function Admin() {
 
     const logout = async () => {
         try {
-            fetch("https://expressjs-server-production-754b.up.railway.app/logout", { credentials: 'include' })
+            fetch(urls.PROD_URL + urls.LOGOUT, { credentials: 'include' })
                 .then(() => navigate("/login"))
 
 
